@@ -17,3 +17,11 @@ class Dictionary:   NSManagedObject {
     
     
 }
+
+class DictionaryWords: ObservableObject {
+    
+    @Published var englishName = ""
+    @Published var urhoboName = ""
+    @Published var imageName = ""
+    
+}

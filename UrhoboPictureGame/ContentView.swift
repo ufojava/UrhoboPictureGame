@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
     
@@ -89,13 +90,13 @@ struct ContentView_Previews: PreviewProvider {
 //Struct for Dictionart Input
 struct dictionaryDataInput: View {
     
-    //Bring in Observerable Object - Dictionary
-    @ObservedObject var dicDetails = Dictionary()
-    
+
+    //Observable Object
+    @ObservedObject var dicDetails = DictionaryWords()
     
     //CoreData - Entity Dictionary
     @Environment(\.managedObjectContext) var managedObjectContext
-    //@FetchRequest(entity: Dictionary.entity(), sortDescriptors: []) var dictionary: FetchedResults<Dictionary>
+    @FetchRequest(entity: Dictionary.entity(), sortDescriptors: []) var dictionary: FetchedResults<Dictionary>
     
     
     //Input Variables
@@ -104,43 +105,146 @@ struct dictionaryDataInput: View {
     @State private var inImangeName = ""
     
     
+    func processInput() {
+        
+        let reformatImageName = inEnglishName.lowercased()
+        
+        //Assign the values to observed variables
+        dicDetails.imageName = reformatImageName
+        dicDetails.englishName = inEnglishName
+        dicDetails.urhoboName = inUrhoboName
+        
+    }
+    
+    
     
     
     var body: some View {
         
-        
-        
-        
-        
-        //NavigationView {
-        
-        
-        Form {
-            VStack {
+        NavigationView {
             
             
-            Text("Hello World")
+            
+        
+            VStack(alignment: .leading) {
                 
-            
-                    
-                    TextField("Enter English Word",text: $inEnglishName)
-                    TextField("Enter Urhobo Transation",text: $inUrhoboName)
-                    
+                Spacer().frame(height: 20)
+                
+                Section(header: Text("Input Form").foregroundColor(Color.red)) {
+        
+        
+                TextField("Enter English Word",text: $inEnglishName)
                     .autocapitalization(.words)
                     .disableAutocorrection(true)
+                    .font(.system(size: 14))
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+            
+                TextField("Enter Urhobo Transation",text: $inUrhoboName)
+                    .autocapitalization(.words)
+                    .disableAutocorrection(true)
+                    .font(.system(size: 14))
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+            
+                
+                }
+                
+               
+                
+        
+                
+                
+                Spacer().frame(height: 20)
+                
+                
+                VStack(alignment: .center) {//Button Action
+                        
+                        Button(action: {
+                            
+                            self.processInput()
+                            
+                        }) {
+                            
+                            Text("Check Details")
+                            .font(.system(size: 14))
+                            .fontWeight(.bold)
+                            .padding()
+                            
+                            .background(Color.blue)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(6)
+                            
+                    }
+                        
+                }.padding(.horizontal, 150)
+                
+                
+                
+                         Spacer().frame(height: 40)
+                
+                Section(header: Text("Input Result").foregroundColor(Color.red)) {
+                       
+                        Spacer().frame(height: 20)
+                    
+                        VStack(alignment: .leading, spacing: 10) {
+                        
+                            Text("Image Name is: \(self.dicDetails.imageName)")
+                            Text("English Word is: \(dicDetails.englishName)")
+                            Text("Urhobo Transalation is: \(dicDetails.urhoboName)")
+                            
+
+                       }
+                        .foregroundColor(Color.green)
+                    
+                    Spacer().frame(height: 50)
+                    
+                    VStack(alignment: .center) {//Button Action
+                            
+                            Button(action: {
+                                
+                                //Details to coreData Entity Dictionary
+                                let word = Dictionary(context: self.managedObjectContext)
+                                    word.englishName = self.dicDetails.englishName
+                                    word.urhoboName = self.dicDetails.urhoboName
+                                    word.imageName = self.dicDetails.imageName
+                                
+                                //Save the input
+                                try? self.managedObjectContext.save()
+                                
+                            }) {
+                                
+                                Text("Save Details")
+                                .font(.system(size: 14))
+                                .fontWeight(.bold)
+                                .padding()
+                                
+                                .background(Color.blue)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(6)
+                                
+                        }
+                            
+                    }.padding(.horizontal, 150)
+                    
+                            
+                }
+                    
                     
                 
-                
-                
-                
-                Spacer()
-            }
-         
-        //.padding()
-        }
         
-        .padding()
+    
+    
+                Spacer()
+            }.padding()
+            
+            
+        
+                .navigationBarTitle(Text("Urhobo Dictionary"),displayMode: .inline)
+        
+       }//End of Navigation View
 
     }
+    
     
 }
