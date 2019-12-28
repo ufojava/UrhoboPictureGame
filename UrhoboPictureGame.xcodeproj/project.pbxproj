@@ -14,6 +14,8 @@
 		0368186A23B77D7400BDB88C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0368186923B77D7400BDB88C /* Assets.xcassets */; };
 		0368186D23B77D7400BDB88C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0368186C23B77D7400BDB88C /* Preview Assets.xcassets */; };
 		0368187023B77D7400BDB88C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0368186E23B77D7400BDB88C /* LaunchScreen.storyboard */; };
+		0383C1D323B77EE100543367 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0383C1D223B77EE100543367 /* Dictionary.swift */; };
+		0383C1D523B77F2E00543367 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0383C1D423B77F2E00543367 /* Menu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		0368186C23B77D7400BDB88C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0368186F23B77D7400BDB88C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0368187123B77D7400BDB88C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0383C1D223B77EE100543367 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		0383C1D423B77F2E00543367 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 		0368185F23B77D7200BDB88C /* UrhoboPictureGame */ = {
 			isa = PBXGroup;
 			children = (
+				0383C1D223B77EE100543367 /* Dictionary.swift */,
+				0383C1D423B77F2E00543367 /* Menu.swift */,
 				0368186023B77D7200BDB88C /* AppDelegate.swift */,
 				0368186223B77D7200BDB88C /* SceneDelegate.swift */,
 				0368186723B77D7200BDB88C /* ContentView.swift */,
@@ -149,7 +155,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0383C1D523B77F2E00543367 /* Menu.swift in Sources */,
 				0368186123B77D7200BDB88C /* AppDelegate.swift in Sources */,
+				0383C1D323B77EE100543367 /* Dictionary.swift in Sources */,
 				0368186623B77D7200BDB88C /* UrhoboPictureGame.xcdatamodeld in Sources */,
 				0368186823B77D7200BDB88C /* ContentView.swift in Sources */,
 				0368186323B77D7200BDB88C /* SceneDelegate.swift in Sources */,
