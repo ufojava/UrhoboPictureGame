@@ -116,6 +116,14 @@ struct dictionaryDataInput: View {
         
     }
     
+    //Function to reset the field
+    func resetTextField() {
+        
+        self.inEnglishName = ""
+        self.inUrhoboName = ""
+        self.inImangeName = ""
+        
+    }
     
     
     
@@ -212,6 +220,12 @@ struct dictionaryDataInput: View {
                                 //Save the input
                                 try? self.managedObjectContext.save()
                                 
+                                //Reset Text Field with delay of 5 seconds
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                
+                                self.resetTextField()
+                                }
+                                
                             }) {
                                 
                                 Text("Save Details")
@@ -245,6 +259,73 @@ struct dictionaryDataInput: View {
        }//End of Navigation View
 
     }
+    
+    
+}
+
+
+//Struct to list all CoreData Dictionary words
+struct listAllData: View {
+    
+    //CoreData Environment
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(entity: Dictionary.entity(), sortDescriptors: []) var dictionary: FetchedResults<Dictionary>
+    
+    
+    
+    
+    var body: some View {
+        
+        NavigationView {
+        
+            List {
+            
+            
+        
+                ForEach(dictionary,id: \.self) { word in
+                    
+                    VStack(alignment: .leading, spacing: 5) {
+                        
+                    Text("English word:               \(word.englishName)")
+                    Text("Urhobo Transalation:  \(word.urhoboName)")
+                    Text("Image File Name:        \(word.imageName)")
+                    
+                        
+                    }//VStack Ending
+                    
+                
+                    
+                }//ForEach Ending
+                
+                //Method for deleting record
+                .onDelete(perform: deleteWord(indexSet:))
+                
+            }// List Ending
+                
+                //NavigationView Edit
+                .navigationBarItems(trailing: EditButton())
+                
+                //Naviagtion View Title
+                .navigationBarTitle(Text("Dictionary List"),displayMode: .inline)
+            
+        }//Navigation View Ending
+        
+                
+     
+            
+        }
+        
+        
+        func deleteWord(indexSet: IndexSet) {
+                 
+            let source = indexSet.first!
+            let dicWord = dictionary[source]
+                 managedObjectContext.delete(dicWord)
+            
+            //Update CoreDate
+            try? managedObjectContext.save()
+    }
+    
     
     
 }

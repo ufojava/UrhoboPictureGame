@@ -51,9 +51,21 @@ struct menuItem: View {
             
             
             if showDcitionaryListMenu {
-                setMenuItemIcons(icon: "list.bullet.below.rectangle")
-                    .foregroundColor(Color.blue)
                 
+                VStack {
+                
+                    NavigationLink(destination: listAllData()) {
+                        
+                        setMenuItemIcons(icon: "list.bullet.below.rectangle")
+                            .foregroundColor(Color.blue)
+                        
+                        
+                    }
+                        
+                
+                    
+                    
+                }
             }//End List Dictionary
         
             
