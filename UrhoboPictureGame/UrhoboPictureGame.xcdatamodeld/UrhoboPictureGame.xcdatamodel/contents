@@ -2,10 +2,11 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Dictionary" representedClassName=".Dictionary" syncable="YES">
         <attribute name="englishName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageName" optional="YES" attributeType="String"/>
         <attribute name="urhoboName" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Dictionary" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Dictionary" positionX="-63" positionY="-18" width="128" height="103"/>
     </elements>
 </model>

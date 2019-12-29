@@ -269,7 +269,7 @@ struct listAllData: View {
     
     //CoreData Environment
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(entity: Dictionary.entity(), sortDescriptors: []) var dictionary: FetchedResults<Dictionary>
+    @FetchRequest(entity: Dictionary.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Dictionary.englishName, ascending: true)]) var dictionary: FetchedResults<Dictionary>
     
     
     
@@ -297,7 +297,7 @@ struct listAllData: View {
                     
                 }//ForEach Ending
                 
-                //Method for deleting record
+                //Method for deleting record from Core Data
                 .onDelete(perform: deleteWord(indexSet:))
                 
             }// List Ending
@@ -328,4 +328,118 @@ struct listAllData: View {
     
     
     
+}
+
+//Game Play
+struct gamePlay: View {
+    
+    //Set CoreData environment
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(entity: Dictionary.entity(), sortDescriptors: []) var dictionary: FetchedResults<Dictionary>
+    
+    
+    //Variables for Game Play
+    @State private var dictionaryWord: [String] = []
+    @State private var correctAnswer = Int.random(in: 0...2)
+    
+    
+
+    
+    
+    //Function to retrieve records from CoreData
+    func processListPicture() -> some View {
+    
+    
+    
+    NavigationView {
+   
+  
+        VStack {
+    
+                List(dictionary,id: \.self) { word in
+                    
+                            HStack {
+                                Text(word.englishName)
+                                Image(word.imageName)
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .scaledToFit()
+                                Text("- Urhobo: \(word.urhoboName)")
+                                
+                               
+                            }
+                    
+                 
+                }//End of ForEach / List
+        }
+     
+        
+    }.navigationBarTitle(Text("English Word Translator"),displayMode: .inline)
+  
+    
+    }//End of Function
+    
+    
+    //Function to match pictures
+    func processPictureCheck() -> String {
+        
+        var localUrhoboName = ""
+        var localEnglishName = ""
+    
+        
+        
+                ForEach(dictionary, id: \.self) { wordcheck in
+            
+            Button(action: {
+                
+                
+                //Assign lowercase to english variable
+                localEnglishName = wordcheck.englishName
+                
+                if localEnglishName == wordcheck.imageName {
+                localUrhoboName = wordcheck.urhoboName
+                    
+                    
+                }
+                
+                
+                
+                
+                
+            }) {
+                
+                
+                
+                Text("Click Here")
+                
+                
+                
+            }
+            
+            
+        }
+        
+        return localUrhoboName
+        
+    
+        
+    }
+ 
+    
+
+    
+    
+    var body: some View {
+    
+       
+            
+                VStack {
+                
+                    processListPicture()
+                    //Text(processPictureCheck())
+        
+            } //VStack End
+        
+         
+    }
 }

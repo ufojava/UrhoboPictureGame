@@ -42,7 +42,7 @@ struct menuItem: View {
                         }
                         
                         
-                    }
+                    }//End of VStack
                 
                 
             }//Add Dictionary End
@@ -65,14 +65,26 @@ struct menuItem: View {
                 
                     
                     
-                }
+                }//End of VStack
+                
             }//End List Dictionary
         
             
             if showPlayGameMenu {
                 
-                setMenuItemIcons(icon: "gamecontroller")
-                    .foregroundColor(Color.yellow)
+                VStack {
+                    
+                    NavigationLink(destination: gamePlay()) {
+                        
+                        setMenuItemIcons(icon: "gamecontroller")
+                        .foregroundColor(Color.yellow)
+                        
+                    }
+                    
+                    
+                }
+                
+                
                 
             }//End play game
             
